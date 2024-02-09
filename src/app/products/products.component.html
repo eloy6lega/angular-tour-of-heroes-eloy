@@ -1,5 +1,31 @@
-<ul>
-    <li>Id del producto: {{producto1.id}}</li>
-    <li>Nombre: {{producto1.name}}</li>
-    <li>Precio: {{producto1.price}}€</li>
-</ul>
+<div style="display: flex; width: 100%;">
+    <div style="flex: 1;">
+        <ul class="product-list">
+            <li *ngFor="let product of products">
+                <button type="button" (click)="onSelect(product)">
+                    <span>{{product.id}}</span>
+                    <span>{{product.name}}</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+    
+
+    <div *ngIf="selectedProduct" style="flex: 1;">
+        <h2>{{selectedProduct.name | uppercase}} Details</h2>
+        <div>id: {{selectedProduct.id}}</div>
+        <div>Nombre: {{selectedProduct.name}}</div>
+        <div>
+            <label for="product-name">Unidades: </label>
+            <input id="product-name" [(ngModel)]="selectedProduct.units" placeholder="name">
+        </div>
+        <div>Precio: {{selectedProduct.price}}€</div>
+        <img src="{{selectedProduct.image}}" alt="" style="width: 40%; height: 25%;">
+        <button type="button" (click)="addToCart(selectedProduct)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+
